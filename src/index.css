@@ -1,0 +1,32 @@
+:root {
+	--clr-bg: #121212;
+	--clr-surface: #181818;
+	--clr-surface-hover: #282828;
+
+	--clr-primary: #1db954;
+	--clr-primary-hover: #1ed760;
+
+	--clr-text-main: #ffffff;
+	--clr-text-base: #b3b3b3;
+	--clr-border: #282828;
+
+	--ff-base: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+	--fs-base: 14px;
+	--fs-md: 18px;
+	--fs-lg: 24px;
+	--fs-xl: 32px;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	background-color: var(--clr-bg);
+	color: var(--clr-text-main);
+	font-family: var(--ff-base);
+	font-size: var(--fs-base);
+}
