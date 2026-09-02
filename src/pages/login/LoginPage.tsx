@@ -23,14 +23,14 @@ export const LoginPage = () => {
 		const code = searchParams.get('code');
 		if (!code || hasExchanged.current) return;
 
-		hasExchanged.current = true; // ← ставим флаг ДО запроса
+		hasExchanged.current = true;
 
 		const run = async () => {
 			setIsLoading(true);
 			try {
 				const data = await exchangeCodeForToken(code);
 				dispatch(setToken(data.access_token));
-				setSearchParams({}, { replace: true }); // чистим URL
+				setSearchParams({}, { replace: true });
 				navigate('/home');
 			} catch (e) {
 				setError(e instanceof Error ? e.message : 'Ошибка входа');
