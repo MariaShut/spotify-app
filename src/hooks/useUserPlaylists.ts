@@ -7,7 +7,6 @@ interface Playlist {
 	name: string;
 }
 
-// Загружает плейлисты текущего пользователя из Spotify API
 export const useUserPlaylists = () => {
 	const token = useSelector((state: RootState) => state.track.token);
 	const [playlists, setPlaylists] = useState<Playlist[]>([]);

@@ -130,3 +130,44 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
+/* TABS */
+
+.tabs {
+	display: flex;
+	gap: 16px;
+	margin-bottom: 24px;
+	border-bottom: 1px solid var(--clr-border);
+	padding-bottom: 12px;
+}
+
+.tab {
+	background: none;
+	border: none;
+	color: var(--clr-text-base);
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	padding: 8px 0;
+	position: relative;
+	transition: color 0.2s;
+}
+
+.tab:hover {
+	color: var(--clr-text-main);
+}
+
+.tab.active {
+	color: var(--clr-text-main);
+}
+
+.tab.active::after {
+	content: '';
+	position: absolute;
+	bottom: -13px;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background: var(--clr-primary);
+	border-radius: 2px;
+}

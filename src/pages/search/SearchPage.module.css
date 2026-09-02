@@ -1,0 +1,107 @@
+.page {
+	padding: 24px 32px;
+}
+
+.title {
+	font-size: var(--fs-lg);
+	font-weight: 700;
+	margin-bottom: 24px;
+	color: var(--clr-text-main);
+}
+
+.empty {
+	color: var(--clr-text-base);
+	font-size: 14px;
+}
+
+.tabs {
+	display: flex;
+	gap: 16px;
+	margin-bottom: 24px;
+	border-bottom: 1px solid var(--clr-border);
+	padding-bottom: 12px;
+}
+
+.tab {
+	background: none;
+	border: none;
+	color: var(--clr-text-base);
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	padding: 8px 0;
+	position: relative;
+	transition: color 0.2s;
+}
+
+.tab:hover {
+	color: var(--clr-text-main);
+}
+
+.tab.active {
+	color: var(--clr-text-main);
+}
+
+.tab.active::after {
+	content: '';
+	position: absolute;
+	bottom: -13px;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background: var(--clr-primary);
+	border-radius: 2px;
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+	gap: 24px;
+}
+
+.card {
+	background: var(--clr-surface);
+	padding: 16px;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+.card:hover {
+	background: var(--clr-surface-hover);
+}
+
+.cover {
+	width: 100%;
+	aspect-ratio: 1;
+	border-radius: 6px;
+	object-fit: cover;
+	margin-bottom: 12px;
+}
+
+.coverRound {
+	width: 100%;
+	aspect-ratio: 1;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-bottom: 12px;
+}
+
+.name {
+	color: var(--clr-text-main);
+	font-size: 14px;
+	font-weight: 600;
+	margin: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.artist {
+	color: var(--clr-text-base);
+	font-size: 12px;
+	margin: 4px 0 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

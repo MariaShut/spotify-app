@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { useState } from 'react';
 import { useSavedAlbums } from '@/hooks/useSavedAlbums';
 import { useLikedTracks } from '@/hooks/useLikedTracks';
 import styles from './HomePage.module.css';
@@ -12,12 +13,22 @@ const formatDuration = (ms: number) => {
 export const HomePage: FC = () => {
 	const albums = useSavedAlbums();
 	const tracks = useLikedTracks();
+	const [activeTab, setActiveTab] = useState<'tracks' | 'albums'>('tracks');
 
 	return (
 		<div className={styles.page}>
-			<section className={styles.section}>
-				<h2 className={styles.title}>Любимые треки</h2>
-				{tracks.length === 0 ? (
+			<h2 className={styles.title}>{activeTab === 'tracks' ? 'Любимые треки' : 'Сохранённые альбомы'}</h2>
+			<div className={styles.tabs}>
+				<button className={`${styles.tab} ${activeTab === 'tracks' ? styles.active : ''}`} onClick={() => setActiveTab('tracks')}>
+					Любимые треки
+				</button>
+				<button className={`${styles.tab} ${activeTab === 'albums' ? styles.active : ''}`} onClick={() => setActiveTab('albums')}>
+					Сохранённые альбомы
+				</button>
+			</div>
+
+			{activeTab === 'tracks' ? (
+				tracks.length === 0 ? (
 					<p className={styles.empty}>Нет сохранённых треков</p>
 				) : (
 					<div className={styles.trackList}>
@@ -33,25 +44,20 @@ export const HomePage: FC = () => {
 							</div>
 						))}
 					</div>
-				)}
-			</section>
-
-			<section className={styles.section}>
-				<h2 className={styles.title}>Сохранённые альбомы</h2>
-				{albums.length === 0 ? (
-					<p className={styles.empty}>Нет сохранённых альбомов</p>
-				) : (
-					<div className={styles.grid}>
-						{albums.map(a => (
-							<div key={a.id} className={styles.card}>
-								<img src={a.images[0]?.url} alt={a.name} className={styles.cover} />
-								<p className={styles.name}>{a.name}</p>
-								<p className={styles.artist}>{a.artists.map(ar => ar.name).join(', ')}</p>
-							</div>
-						))}
-					</div>
-				)}
-			</section>
+				)
+			) : albums.length === 0 ? (
+				<p className={styles.empty}>Нет сохранённых альбомов</p>
+			) : (
+				<div className={styles.grid}>
+					{albums.map(a => (
+						<div key={a.id} className={styles.card}>
+							<img src={a.images[0]?.url} alt={a.name} className={styles.cover} />
+							<p className={styles.name}>{a.name}</p>
+							<p className={styles.artist}>{a.artists.map(ar => ar.name).join(', ')}</p>
+						</div>
+					))}
+				</div>
+			)}
 		</div>
 	);
 };

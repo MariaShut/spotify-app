@@ -10,6 +10,14 @@ interface Track {
 	duration_ms: number;
 }
 
+interface LikedItem {
+	track: Track;
+}
+
+interface LikedResponse {
+	items?: LikedItem[];
+}
+
 export const useLikedTracks = () => {
 	const token = useSelector((state: RootState) => state.track.token);
 	const [tracks, setTracks] = useState<Track[]>([]);
@@ -19,8 +27,8 @@ export const useLikedTracks = () => {
 		fetch('https://api.spotify.com/v1/me/tracks?limit=10', {
 			headers: { Authorization: `Bearer ${token}` },
 		})
-			.then(r => r.json())
-			.then(d => setTracks(d.items?.map((item: any) => item.track) || []))
+			.then(r => r.json() as Promise<LikedResponse>)
+			.then(d => setTracks(d.items?.map(item => item.track) || []))
 			.catch(() => setTracks([]));
 	}, [token]);
 

@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import { useState, type FC, type KeyboardEvent } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '@/app/store';
@@ -13,6 +13,14 @@ export const Header: FC = () => {
 	const dispatch = useDispatch();
 	const token = useSelector((state: RootState) => state.track.token);
 	const userName = useUserProfile();
+
+	const [searchQuery, setSearchQuery] = useState('');
+
+	const handleSearch = (e: KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === 'Enter' && searchQuery.trim()) {
+			navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+		}
+	};
 
 	const handleLogout = (): void => {
 		dispatch(clearToken());
@@ -38,7 +46,7 @@ export const Header: FC = () => {
 						<circle cx="11" cy="11" r="8" />
 						<path d="M21 21l-4.35-4.35" />
 					</svg>
-					<input type="text" placeholder="Что хочешь включить?" className={styles.searchInput} />
+					<input type="text" placeholder="Что хочешь включить?" className={styles.searchInput} value={searchQuery} onChange={e => setSearchQuery(e.target.value)} onKeyDown={handleSearch} />
 				</div>
 			)}
 

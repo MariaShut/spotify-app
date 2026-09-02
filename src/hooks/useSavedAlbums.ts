@@ -9,6 +9,14 @@ interface Album {
 	artists: { name: string }[];
 }
 
+interface SavedItem {
+	album: Album;
+}
+
+interface SavedResponse {
+	items?: SavedItem[];
+}
+
 export const useSavedAlbums = () => {
 	const token = useSelector((state: RootState) => state.track.token);
 	const [albums, setAlbums] = useState<Album[]>([]);
@@ -18,8 +26,8 @@ export const useSavedAlbums = () => {
 		fetch('https://api.spotify.com/v1/me/albums?limit=20', {
 			headers: { Authorization: `Bearer ${token}` },
 		})
-			.then(r => r.json())
-			.then(d => setAlbums(d.items?.map((item: any) => item.album) || []))
+			.then(r => r.json() as Promise<SavedResponse>)
+			.then(d => setAlbums(d.items?.map(item => item.album) || []))
 			.catch(() => setAlbums([]));
 	}, [token]);
 
