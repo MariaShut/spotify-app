@@ -1,4 +1,4 @@
-import { getAccessToken } from './spotify-auth';
+import { getAccessToken } from './spotifyAuth';
 
 export const makeRequest = async <T = unknown>(url: string, options?: RequestInit): Promise<T> => {
 	const token = getAccessToken();

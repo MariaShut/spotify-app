@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setToken } from '@/entities/track';
-import { exchangeCodeForToken, getAccessToken, redirectToSpotifyAuth } from '@/api/spotify-auth';
+import { exchangeCodeForToken, getAccessToken, redirectToSpotifyAuth } from '@/api/spotifyAuth';
 import styles from './LoginPage.module.css';
 
 export const LoginPage = () => {

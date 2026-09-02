@@ -3,7 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '@/app/store';
 import { clearToken } from '@/entities/track';
-import { clearTokens } from '@/api/spotify-auth';
+import { clearTokens } from '@/api/spotifyAuth';
+import { useUserProfile } from '@/hooks/useUserProfile';
 import styles from './Header.module.css';
 
 export const Header: FC = () => {
@@ -11,6 +12,7 @@ export const Header: FC = () => {
 	const location = useLocation();
 	const dispatch = useDispatch();
 	const token = useSelector((state: RootState) => state.track.token);
+	const userName = useUserProfile();
 
 	const handleLogout = (): void => {
 		dispatch(clearToken());
@@ -48,7 +50,7 @@ export const Header: FC = () => {
 								<path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
 							</svg>
 						</span>
-						<span className={styles.userName}>Guest</span>
+						<span className={styles.userName}>{userName}</span>
 					</button>
 				) : (
 					<button className={styles.loginBtn} onClick={() => navigate('/login')}>

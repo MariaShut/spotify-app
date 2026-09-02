@@ -1,6 +1,132 @@
 .title {
 	font-size: var(--fs-lg);
 	font-weight: 700;
-	margin-bottom: 16px;
+	margin-bottom: 20px;
 	color: var(--clr-text-main);
+}
+
+.page {
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+}
+
+.section {
+	width: 100%;
+}
+
+.empty {
+	color: var(--clr-text-base);
+	font-size: 14px;
+}
+
+/* TRACKS */
+
+.trackList {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.trackRow {
+	display: grid;
+	grid-template-columns: 30px 48px 1fr auto;
+	align-items: center;
+	gap: 16px;
+	padding: 8px 16px;
+	border-radius: 4px;
+	transition: background 0.2s;
+	cursor: default;
+}
+
+.trackRow:hover {
+	background: var(--clr-surface-hover);
+}
+
+.trackNum {
+	color: var(--clr-text-base);
+	font-size: 14px;
+	text-align: center;
+}
+
+.trackImg {
+	width: 40px;
+	height: 40px;
+	border-radius: 4px;
+	object-fit: cover;
+}
+
+.trackInfo {
+	min-width: 0;
+}
+
+.trackName {
+	color: var(--clr-text-main);
+	font-size: 14px;
+	font-weight: 600;
+	margin: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.trackArtist {
+	color: var(--clr-text-base);
+	font-size: 12px;
+	margin: 4px 0 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.trackDuration {
+	color: var(--clr-text-base);
+	font-size: 12px;
+}
+
+/* ALBUMS */
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+	gap: 24px;
+}
+
+.card {
+	background: var(--clr-surface);
+	padding: 16px;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+.card:hover {
+	background: var(--clr-surface-hover);
+}
+
+.cover {
+	width: 100%;
+	aspect-ratio: 1;
+	border-radius: 6px;
+	object-fit: cover;
+	margin-bottom: 12px;
+}
+
+.name {
+	color: var(--clr-text-main);
+	font-size: 14px;
+	font-weight: 600;
+	margin: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.artist {
+	color: var(--clr-text-base);
+	font-size: 12px;
+	margin: 4px 0 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
