@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setToken } from '@/entities/track';
@@ -11,6 +11,7 @@ export const LoginPage = () => {
 	const dispatch = useDispatch();
 	const [error, setError] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState(false);
+	const hasExchanged = useRef(false);
 
 	useEffect(() => {
 		if (getAccessToken()) {
@@ -20,33 +21,25 @@ export const LoginPage = () => {
 
 	useEffect(() => {
 		const code = searchParams.get('code');
-		if (!code) return;
+		if (!code || hasExchanged.current) return;
 
-		let cancelled = false;
+		hasExchanged.current = true; // ← ставим флаг ДО запроса
 
 		const run = async () => {
 			setIsLoading(true);
 			try {
 				const data = await exchangeCodeForToken(code);
-				if (!cancelled) {
-					dispatch(setToken(data.access_token));
-					setSearchParams({});
-					navigate('/home');
-				}
+				dispatch(setToken(data.access_token));
+				setSearchParams({}, { replace: true }); // чистим URL
+				navigate('/home');
 			} catch (e) {
-				if (!cancelled) {
-					setError(e instanceof Error ? e.message : 'Ошибка входа');
-				}
+				setError(e instanceof Error ? e.message : 'Ошибка входа');
 			} finally {
-				if (!cancelled) setIsLoading(false);
+				setIsLoading(false);
 			}
 		};
 
 		void run();
-
-		return () => {
-			cancelled = true;
-		};
 	}, [searchParams, setSearchParams, navigate, dispatch]);
 
 	const handleSignIn = async () => {
